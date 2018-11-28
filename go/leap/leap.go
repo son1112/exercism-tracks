@@ -3,18 +3,16 @@ package leap
 
 // IsLeapYear returns true if given year is a leap year, false otherwise
 func IsLeapYear(year int) bool {
-	if divisibleBy(year, 4) {
-		if divisibleBy(year, 100) {
-			if divisibleBy(year, 400) {
-				return true
-			}
-			return false
-		}
+
+	if year%4 != 0 {
+		return false
+	}
+	if year%400 == 0 {
 		return true
 	}
-	return false
-}
+	if year%100 == 0 {
+		return false
+	}
 
-func divisibleBy(year int, divisor int) bool {
-	return year%divisor == 0
+	return true
 }
