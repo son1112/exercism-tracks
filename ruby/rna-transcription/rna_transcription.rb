@@ -8,12 +8,6 @@ module Complement
   }
 
   def self.of_dna(string)
-    string_complement = []
-
-    string.each_char { |char|
-      string_complement << COMPLEMENTS[char.to_sym]
-    }
-
-    string_complement.join
+    string.each_char.sum("") { |char| COMPLEMENTS[char.to_sym] }
   end
 end
