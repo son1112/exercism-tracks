@@ -7,11 +7,6 @@ type Planet string
 
 // Age converts earth seconds to given planet's years
 func Age(seconds float64, planet Planet) float64 {
-	return float64(seconds) / YearSeconds(planet)
-}
-
-// YearSeconds returns a given planet's year in seconds
-func YearSeconds(planet Planet) float64 {
 	var base float64 = 31557600
 
 	planetYears := func(planet Planet) float64 {
@@ -37,5 +32,5 @@ func YearSeconds(planet Planet) float64 {
 		}
 	}
 
-	return base * planetYears(planet)
+	return float64(seconds) / (base * planetYears(planet))
 }
