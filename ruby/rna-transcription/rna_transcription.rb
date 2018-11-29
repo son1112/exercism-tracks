@@ -1,22 +1,13 @@
 module Complement
+  COMPLEMENTS = {
+    'C' => 'G',
+    'G' => 'C',
+    'T' => 'A',
+    'A' => 'U',
+     '' => ''
+  }
 
   def self.of_dna(string)
-    string_complement = []
-
-    string.split('').each { |char|
-      string_complement << complements[char.to_sym]
-    }
-
-    string_complement.join
-  end
-
-  def self.complements
-    {
-      'C': 'G',
-      'G': 'C',
-      'T': 'A',
-      'A': 'U',
-      '': ''
-    }
+    string.each_char.sum('') { |char|  COMPLEMENTS[char] }
   end
 end
