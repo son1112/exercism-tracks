@@ -5,7 +5,6 @@
 
 (in-package #:hello-world)
 
-(defun hellow-world
-  "Return the string: Hello, World!"
-  (format t "Hello, World!")
+(defun hello-world ()
+  "Hello, World!"
   )
