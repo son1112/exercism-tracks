@@ -1,39 +1,49 @@
+require 'pry'
+
+# BeerSong recites the class beer song from number of beers down by count
 module BeerSong
   def self.recite(number, count)
     statements = []
 
-    while count > 0
-      statements << statement(number, number - 1)
-      number -= 1
-      count -= 1
+    (0...count).to_a.map do |dec|
+      statements << statement(number - dec)
     end
 
-    return statements.join("\n")
+    statements.join("\n")
   end
 
-  def self.statement(number, dec)
-    first = "#{plurality(number, true)} of beer on the wall, #{plurality(number)} of beer."
-    second = number > 0 ?
-               "Take #{take(number)} down and pass it around, #{plurality(dec)} of beer on the wall."
-               : "Go to the store and buy some more, 99 bottles of beer on the wall."
+  def self.statement(number)
+    dec = number - 1
+    current_bottles = plurality(number)
+    remaining_bottles = plurality(dec)
 
     <<-TEXT.gsub(/^ */, '')
-    #{first}
-    #{second}
+    #{current_bottles.capitalize} of beer on the wall, #{current_bottles} of beer.
+    #{take(number)}, #{remaining_bottles} of beer on the wall.
     TEXT
   end
 
-  def self.plurality(number, cap = nil)
-    front = cap ? "No" : "no"
-    return "#{front} more bottles" if number == 0
-    number > 1 ? "#{number} bottles" : "#{number} bottle"
+  def self.plurality(number_of_bottles)
+    number = number_of_bottles
+
+    if number > 1
+      "#{number} bottles"
+    elsif number == 1
+      "#{number} bottle"
+    elsif number.zero?
+      'no more bottles'
+    elsif number < 0
+      '99 bottles'
+    end
   end
 
   def self.take(number)
-    number > 1 ? "one" : "it"
-  end
-
-  def self.remaining(number)
-    number > 0 ? number : "no more"
+    if number > 1
+      'Take one down and pass it around'
+    elsif number == 1
+      'Take it down and pass it around'
+    elsif number.zero?
+      'Go to the store and buy some more'
+    end
   end
 end
