@@ -3,13 +3,9 @@ require 'pry'
 # BeerSong recites the class beer song from number of beers down by count
 module BeerSong
   def self.recite(number, count)
-    statements = []
-
     (0...count).to_a.map do |dec|
-      statements << statement(number - dec)
-    end
-
-    statements.join("\n")
+      statement(number - dec)
+    end.join("\n")
   end
 
   def self.statement(number)
