@@ -16,7 +16,7 @@ class SpaceAge
   PLANETS.each do |planet, earth_years|
     method_name = "on_#{planet}".to_sym
     define_method(method_name) do
-      calculate_age.call(earth_years)
+      calculate_age(earth_years)
     end
   end
 
@@ -26,7 +26,7 @@ class SpaceAge
     @seconds = seconds
   end
 
-  def calculate_age
-    proc { |earth_years| seconds / (EARTH_ORBITAL * earth_years) }
+  def calculate_age(earth_years)
+    seconds / (EARTH_ORBITAL * earth_years)
   end
 end
