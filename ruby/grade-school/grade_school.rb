@@ -1,3 +1,4 @@
+# School provides a class for creating a school roster
 class School
   def initialize
     @students = {}
@@ -5,20 +6,20 @@ class School
   end
 
   def add(name, grade)
-    student_list = @students[grade] || []
-    @students[grade] = student_list << name
+    (@students[grade] ||= []) << name
   end
 
   def students(grade)
-    @students[grade] ? @students[grade].sort : []
+    return [] if @students[grade].nil?
+
+    @students[grade].sort
   end
 
   def students_by_grade
-    @students.each { |grade, students|
-      @grade_list.push(
-        { grade: grade, students: students.sort }
-      )
-    }
-    @grade_list.sort_by { |hash| hash[:grade] }
+    collection = @students.collect do |grade, students|
+      { grade: grade, students: students.sort }
+    end
+
+    collection.sort_by { |hash| hash[:grade] }
   end
 end
