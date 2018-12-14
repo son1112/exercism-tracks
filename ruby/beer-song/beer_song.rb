@@ -3,15 +3,15 @@ require 'pry'
 # BeerSong recites the class beer song from number of beers down by count
 module BeerSong
   def self.recite(number, count)
-    (0...count).to_a.map do |dec|
+    (0...count).map do |dec|
       statement(number - dec)
     end.join("\n")
   end
 
   def self.statement(number)
     dec = number - 1
-    current_bottles = plurality(number)
-    remaining_bottles = plurality(dec)
+    current_bottles = x_bottles(number)
+    remaining_bottles = x_bottles(dec)
 
     <<-TEXT.gsub(/^ */, '')
     #{current_bottles.capitalize} of beer on the wall, #{current_bottles} of beer.
@@ -19,9 +19,7 @@ module BeerSong
     TEXT
   end
 
-  def self.plurality(number_of_bottles)
-    number = number_of_bottles
-
+  def self.x_bottles(number)
     if number > 1
       "#{number} bottles"
     elsif number == 1
