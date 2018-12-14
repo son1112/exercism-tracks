@@ -16,10 +16,16 @@ class School
   end
 
   def students_by_grade
-    collection = @students.collect do |grade, students|
-      { grade: grade, students: students.sort }
-    end
+    grade_collection.sort_by { |hash| hash[:grade] }
+  end
 
-    collection.sort_by { |hash| hash[:grade] }
+  def grade_collection
+    @students.collect do |grade, students|
+      data_for_grade(grade, students)
+    end
+  end
+
+  def data_for_grade(grade, students)
+    { grade: grade, students: students.sort }
   end
 end
