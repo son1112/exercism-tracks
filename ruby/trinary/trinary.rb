@@ -1,5 +1,3 @@
-require 'pry'
-
 # Trinary converts trinary number to decimal equivalent
 class Trinary
   def initialize(trinary)
