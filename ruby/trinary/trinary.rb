@@ -9,17 +9,16 @@ class Trinary
   def to_decimal
     return 0 unless valid_trinary?
 
-    denary = []
-
-    @trinary.each_char.with_index do |char, index|
-      power = (@trinary.length - 1) - index
-      denary << trinary_to_denary(char.to_i, power)
-    end
-
-    denary.sum
+    @trinary.each_char.with_index.collect do |char, index|
+      to_denary(char.to_i, power(index))
+    end.sum
   end
 
-  def trinary_to_denary(digit, power)
+  def power(num)
+    (@trinary.length - 1) - num
+  end
+
+  def to_denary(digit, power)
     digit * (3**power)
   end
 
