@@ -2,14 +2,11 @@
 module Binary
   def self.to_decimal(binary_string)
     validate(binary_string)
-    denary = []
 
-    binary_string.each_char.with_index do |char, index|
+    binary_string.each_char.with_index.collect do |char, index|
       power = (binary_string.length - 1) - index
-      denary << binary_to_denary(char.to_i, power)
-    end
-
-    denary.sum
+      binary_to_denary(char.to_i, power)
+    end.sum
   end
 
   def self.binary_to_denary(digit, power)
