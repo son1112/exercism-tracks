@@ -14,6 +14,6 @@ module Binary
   end
 
   def self.validate(binary_string)
-    raise ArgumentError unless binary_string.count('^0 - 1').zero?
+    raise ArgumentError unless binary_string[/[^0-1]/].nil?
   end
 end
