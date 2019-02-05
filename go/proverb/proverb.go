@@ -1,22 +1,30 @@
 // Package proverb produces an array of proverbs from an array of inputs
 package proverb
 
+import (
+	"fmt"
+)
+
 // Proverb outputs an array of proverbial rhymes from given array of inputs
 func Proverb(rhyme []string) []string {
 	length := len(rhyme)
 	rhymes := []string{}
 
-	switch length {
-	case 0:
-		return []string{}
-	case 1:
-		"And all for the want of a "
+	if length == 0 {
+		return rhymes
 	}
 
 	for index, item := range rhyme {
-		// multiple strings, all but last like
-		// "For want of a <item> the <next-item> was lost."
-		// last string like "And all for the want of a <first-item>."
-		// no input defaults to empty string?
+		statement := ""
+		switch index {
+		case 0:
+			statement = fmt.Sprintf("And all for the want of a %s.", item)
+		default:
+			statement = fmt.Sprintf("For want of a %s the %s was lost.", rhyme[index-1], item)
+		}
+
+		rhymes = append([]string{statement}, rhymes...)
 	}
+
+	return rhymes
 }
