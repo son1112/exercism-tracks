@@ -1,6 +1,4 @@
-require 'pry'
-
-# Trinary converts trinary number to denary
+# Trinary converts trinary number to decimal
 class Trinary
   def initialize(trinary)
     @trinary = trinary
@@ -9,9 +7,15 @@ class Trinary
   def to_decimal
     return 0 unless valid_trinary?
 
-    @trinary.chars.each_with_index.sum do |char, index|
-      to_denary(char.to_i, power(index))
+    digits.each_with_index.sum do |digit, index|
+      to_denary(digit, power(index))
     end
+  end
+
+  private
+
+  def digits
+    @trinary.to_i.digits.reverse
   end
 
   def power(num)
@@ -23,9 +27,12 @@ class Trinary
   end
 
   def valid_trinary?
-
-    binding.pry if @trinary[/Invalid/]
+    return false if contains_newlines?
 
     @trinary.match?(/^[0-3]*$/)
+  end
+
+  def contains_newlines?
+    @trinary.match?(/\n/)
   end
 end
