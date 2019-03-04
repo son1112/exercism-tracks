@@ -8,22 +8,14 @@ class Trinary
     return 0 unless valid_trinary?
 
     digits.each_with_index.sum do |digit, index|
-      to_denary(digit, power(index))
+      digit * (3**index)
     end
   end
 
   private
 
   def digits
-    @trinary.to_i.digits.reverse
-  end
-
-  def power(num)
-    (@trinary.length - 1) - num
-  end
-
-  def to_denary(digit, power)
-    digit * (3**power)
+    @trinary.to_i.digits
   end
 
   def valid_trinary?
